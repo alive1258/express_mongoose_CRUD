@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TFullName, TOrder, TUser, TUserAddress } from './user.interface';
+import { TFullName, TUser, TUserAddress } from './user.interface';
 // import User from './user.model';
 
 const userFullNameSchema = new Schema<TFullName>({
@@ -27,21 +27,6 @@ const userAddressSchema = new Schema<TUserAddress>({
   },
 });
 
-const userOrdersSchema = new Schema<TOrder>({
-  productName: {
-    type: String,
-    required: [true, 'Please tell us productName'],
-  },
-  price: {
-    type: Number,
-    required: [true, 'Please tell us price'],
-  },
-  quantity: {
-    type: Number,
-    required: [true, 'Please tell us quantity'],
-  },
-});
-
 //Define a schema for  user
 
 const userSchema = new Schema<TUser>({
@@ -66,7 +51,6 @@ const userSchema = new Schema<TUser>({
   isActive: Boolean,
   hobbies: [String],
   address: userAddressSchema,
-  orders: [userOrdersSchema],
 });
 
 // export const User = model<TUser, UserModel>('User', userSchema);

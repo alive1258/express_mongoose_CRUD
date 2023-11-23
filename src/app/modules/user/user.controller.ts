@@ -163,6 +163,7 @@ const deleteSingleUser = async (req: Request, res: Response) => {
     }
   }
 };
+// update single User controller
 const updateSingleUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
