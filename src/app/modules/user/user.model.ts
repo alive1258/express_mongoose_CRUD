@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { TFullName, TOrder, TUser, TUserAddress } from './user.interface';
+// import User from './user.model';
 
 const userFullNameSchema = new Schema<TFullName>({
   firstName: {
