@@ -1,5 +1,5 @@
 import { TUser } from './user.interface';
-import User from './user.model';
+import { User } from './user.model';
 
 const createUserIntoDB = async (userData: TUser) => {
   const result = await User.create(userData);
@@ -19,9 +19,18 @@ const deleteUserFromDB = async (id: string) => {
   return result;
 };
 
+const updateUserFromDB = async (id: string, newData: TUser) => {
+  const result = await User.findByIdAndUpdate(id, newData, {
+    new: true,
+    runValidators: true,
+  });
+  return result;
+};
+
 export const userServices = {
   createUserIntoDB,
   getAllUsersFromDB,
   getSingleUserFromDB,
   deleteUserFromDB,
+  updateUserFromDB,
 };

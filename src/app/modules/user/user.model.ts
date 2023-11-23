@@ -69,6 +69,5 @@ const userSchema = new Schema<TUser>({
   orders: [userOrdersSchema],
 });
 
-const User = model<TUser>('User', userSchema);
-
-export default User;
+// export const User = model<TUser, UserModel>('User', userSchema);
+export const User = model<TUser>('User', userSchema);
