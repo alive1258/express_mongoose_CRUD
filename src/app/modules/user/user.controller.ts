@@ -48,7 +48,7 @@ const getAllUsers = async (req: Request, res: Response) => {
     //get all user in the database
     const result = await userServices.getAllUsersFromDB();
     // if successful, respond with a success message and the created user data
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: 'User fetched Successfully',
       data: result,
@@ -57,7 +57,48 @@ const getAllUsers = async (req: Request, res: Response) => {
     //if an error occurs during user creation process
     if (error instanceof Error) {
       // log the error for debugging purposes
-      //   console.log(error);
+      console.log(error);
+
+      // Respond with a detailed error message indicating user not found
+      res.status(500).json({
+        success: false,
+        description: 'User not found',
+        error: {
+          code: 404,
+          description: 'User not found',
+        },
+      });
+    } else {
+      // if the error is of an unknown type, respond with a generic error message
+      res.status(500).json({
+        success: false,
+        description: 'User not found',
+        error: {
+          code: 404,
+          description: 'User not found',
+        },
+      });
+    }
+  }
+};
+// get single User controller
+const getSingleUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+
+    //get single user in the database
+    const result = await userServices.getSingleUserFromDB(userId);
+    // if successful, respond with a success message and the created user data
+    res.status(200).json({
+      success: true,
+      message: 'Single User fetched Successfully',
+      data: result,
+    });
+  } catch (error: unknown) {
+    //if an error occurs during user creation process
+    if (error instanceof Error) {
+      // log the error for debugging purposes
+      console.log(error);
 
       // Respond with a detailed error message indicating user not found
       res.status(500).json({
@@ -85,4 +126,5 @@ const getAllUsers = async (req: Request, res: Response) => {
 export const userController = {
   createUser,
   getAllUsers,
+  getSingleUser,
 };

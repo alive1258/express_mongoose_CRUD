@@ -13,7 +13,7 @@ app.use('/api/users', userRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).json({
-    status: 'success',
+    success: true,
     message: 'welcome to Mongoose Express CRUD Mastery',
   });
 });
