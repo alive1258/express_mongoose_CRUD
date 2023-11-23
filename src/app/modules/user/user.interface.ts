@@ -31,5 +31,6 @@ export type TUser = {
 
 //for create static
 export interface UserModel extends Model<TUser> {
+  // eslint-disable-next-line no-unused-vars
   isUserExists(userId: number): Promise<TUser | null>;
 }
