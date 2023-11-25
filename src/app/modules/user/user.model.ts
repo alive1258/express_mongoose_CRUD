@@ -74,7 +74,6 @@ userSchema.set('toJSON', {
 //post save middleware hook
 userSchema.post('save', function (doc, next) {
   doc.password = '';
-  console.log(this, 'post hook: we  saved the data');
   next();
 });
 

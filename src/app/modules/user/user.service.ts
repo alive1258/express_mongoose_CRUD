@@ -2,11 +2,17 @@ import { TUser } from './user.interface';
 import { User } from './user.model';
 
 const createUserIntoDB = async (userData: TUser) => {
-  if (await User.isUserExists(userData.userId)) {
-    throw new Error('User already exists');
+  try {
+    const existingUser = await User.findOne({ userId: userData.userId });
+    if (existingUser) {
+      throw new Error('User already exists');
+    }
+    const result = await User.create(userData);
+    return result;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    throw new Error('failed to create user.' + error.message);
   }
-  const result = await User.create(userData);
-  return result;
 };
 
 const getAllUsersFromDB = async () => {

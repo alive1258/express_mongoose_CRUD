@@ -27,17 +27,17 @@ const createUser = async (req: Request, res: Response) => {
       // Respond with a detailed error message indicating user not found
       res.status(500).json({
         success: false,
-        message: 'User not found',
+        message: 'something went wrong',
         error: {
           code: 404,
-          description: 'User not found',
+          description: error.message || 'User not found',
         },
       });
     } else {
       // if the error is of an unknown type, respond with a generic error message
       res.status(500).json({
         success: false,
-        description: 'User not found',
+        message: 'something went wrong',
         error: {
           code: 404,
           description: 'User not found',
