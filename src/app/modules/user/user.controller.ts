@@ -1,12 +1,17 @@
 import { Request, Response } from 'express';
 import { userServices } from './user.service';
 
+import userValidationSchema from './user.zod.validation';
+
 const createUser = async (req: Request, res: Response) => {
   try {
     // user data from the request body
     const userData = req.body;
+    // data validation in zod
+    const zodUserData = userValidationSchema.parse(userData);
+
     //create a user in the database
-    const result = await userServices.createUserIntoDB(userData);
+    const result = await userServices.createUserIntoDB(zodUserData);
     // if successful, respond with a success message and the created user data
     res.status(201).json({
       success: true,
@@ -57,7 +62,7 @@ const getAllUsers = async (req: Request, res: Response) => {
     //if an error occurs during user creation process
     if (error instanceof Error) {
       // log the error for debugging purposes
-      console.log(error);
+      // console.log(error);
 
       // Respond with a detailed error message indicating user not found
       res.status(500).json({
@@ -98,7 +103,7 @@ const getSingleUser = async (req: Request, res: Response) => {
     //if an error occurs during user creation process
     if (error instanceof Error) {
       // log the error for debugging purposes
-      console.log(error);
+      // console.log(error);
 
       // Respond with a detailed error message indicating user not found
       res.status(500).json({
@@ -139,7 +144,7 @@ const deleteSingleUser = async (req: Request, res: Response) => {
     //if an error occurs during user creation process
     if (error instanceof Error) {
       // log the error for debugging purposes
-      console.log(error);
+      // console.log(error);
 
       // Respond with a detailed error message indicating user not found
       res.status(500).json({
@@ -181,7 +186,7 @@ const updateSingleUser = async (req: Request, res: Response) => {
     //if an error occurs during user creation process
     if (error instanceof Error) {
       // log the error for debugging purposes
-      console.log(error);
+      // console.log(error);
 
       // Respond with a detailed error message indicating user not found
       res.status(500).json({
